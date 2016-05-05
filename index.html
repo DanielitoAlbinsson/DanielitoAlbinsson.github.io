@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.1.1/foundation.min.css">
+
+    </head>
+    <body>
+    <div class="row">
+    <div class="medium-14 columns">
+    <h1>Body mass index (BMI)</h1>
+
+    <script src='https://code.jquery.com/jquery-2.1.4.js'></script>
+    <script src="src/person.js"></script>
+    <script src="src/bmi_calculator.js"></script>
+  </head>
+
+  <body>
+
+    <form>
+      <input type="radio" id="metric_method" value="metric"> Metric   (kg, cm)<br>
+      <input type="radio" id="imperial_method" value="imperial"> Imperial (pound, inch)<br>
+      <input type="text" id="weight" placeholder="weight">
+      <input type="text" id="height" placeholder="height">
+
+      <input type="button" id="calculate" value="calculate">
+    </form>
+    <div>
+      <span id="display_value"></span>
+      <span id="display_message"></span>
+    </div>
+
+ <script type="text/javascript">
+   $(document).ready(function(){
+   //$('#metric_method').click();
+
+    $('#calculate').click(function(){
+      var w = parseFloat($('#weight').val());
+      var h = parseFloat($('#height').val());
+      var person = new Person({weight: w, height: h});
+
+      if($('#metric_method').is(':checked')) {
+      person.calculate_metric_bmi();
+      }
+
+      else{
+
+      ($('#imperial_method').is(':checked'))
+      person.calculate_imperial_bmi();
+    }
+
+    //  person.calculate_metric_bmi();
+    //  person.calculate_imperial_bmi();
+      $('#display_value').html('Your BMI is ' + person.bmiValue);
+      $('#display_message').html('and you are ' + person.bmiMessage);
+
+    });
+   });
+ </script>
+</body>
+</html>
